@@ -17,4 +17,18 @@ struct Device: Identifiable, Codable, Equatable {
     var displayName: String {
         hostname ?? vendor ?? mac
     }
+
+    var iconName: String {
+        switch deviceType {
+        case "Router": return "wifi.router"
+        case "Laptop": return "laptopcomputer"
+        case "Mobile": return "iphone"
+        case "Storage": return "externaldrive.connected.to.line.below"
+        case "Gaming": return "gamecontroller"
+        case "IoT": return "sensor"
+        case "TV": return "tv"
+        case "Camera": return "video"
+        default: return "questionmark.circle"
+        }
+    }
 }
