@@ -9,7 +9,7 @@ struct OverviewView: View {
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 280, maximum: 360), spacing: 16)], spacing: 16) {
                 WidgetCard(title: "Connected Devices") {
                     Text("\(deviceStore.devices.count)")
                         .font(.system(size: 30, weight: .heavy, design: .monospaced))
