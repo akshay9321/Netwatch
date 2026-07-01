@@ -18,7 +18,7 @@ struct PeopleView: View {
                     }
                 }
 
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 220, maximum: 300), spacing: 16)], spacing: 16) {
                     ForEach(peopleStore.people) { person in
                         WidgetCard(title: person.name) {
                             let home = peopleStore.isHome(person, devices: deviceStore.devices)
@@ -38,6 +38,16 @@ struct PeopleView: View {
                             .font(.system(size: 10.5))
                         }
                     }
+                }
+
+                if peopleStore.people.isEmpty {
+                    VStack(spacing: 6) {
+                        Text("No people added yet").font(.system(size: 12.5, weight: .semibold)).foregroundColor(Theme.textSecondary)
+                        Text("Add a person above, then use \"Assign device\" on their card to track when they're home.")
+                            .font(.system(size: 11)).foregroundColor(Theme.textTertiary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 40)
                 }
             }
             .padding(20)
