@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: macos-14
+    defaults:
+      run:
+        working-directory: NetWatch-Repo
     steps:
       - uses: actions/checkout@v4
 
@@ -28,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: NetWatch-macOS
-          path: dist/NetWatch.app.zip
+          path: NetWatch-Repo/dist/NetWatch.app.zip
           retention-days: 14
