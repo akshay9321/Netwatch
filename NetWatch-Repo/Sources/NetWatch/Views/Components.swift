@@ -65,3 +65,45 @@ struct SectionLabel: View {
             .padding(.bottom, 4)
     }
 }
+
+struct DeviceIconBadge: View {
+    var iconName: String
+    var size: CGFloat = 26
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: size * 0.28).fill(Theme.accentTeal.opacity(0.14))
+            Image(systemName: iconName)
+                .font(.system(size: size * 0.5))
+                .foregroundColor(Theme.accentTeal)
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+struct NetworkRadarView: View {
+    @State private var angle: Double = 0
+    var body: some View {
+        ZStack {
+            ForEach([16, 30, 43], id: \.self) { r in
+                Circle().stroke(Theme.border, lineWidth: 1)
+                    .frame(width: CGFloat(r) * 2, height: CGFloat(r) * 2)
+            }
+            Circle()
+                .trim(from: 0, to: 0.22)
+                .stroke(
+                    AngularGradient(gradient: Gradient(colors: [Theme.accentTeal.opacity(0.55), Theme.accentTeal.opacity(0)]), center: .center),
+                    style: StrokeStyle(lineWidth: 86, lineCap: .butt)
+                )
+                .frame(width: 86, height: 86)
+                .rotationEffect(.degrees(angle))
+                .clipShape(Circle().size(width: 86, height: 86))
+            Circle().fill(Theme.accentTeal).frame(width: 5, height: 5)
+        }
+        .frame(width: 92, height: 92)
+        .onAppear {
+            withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
+                angle = 360
+            }
+        }
+    }
+}
