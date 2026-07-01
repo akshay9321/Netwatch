@@ -16,6 +16,5 @@ struct NetWatchApp: App {
                 .environmentObject(settings)
         }
         .windowStyle(.titleBar)
-        .defaultSize(width: 1200, height: 760)
     }
 }
