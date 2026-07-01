@@ -9,11 +9,7 @@ struct DeviceDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 12) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 11).fill(Theme.accentTeal.opacity(0.14))
-                        Image(systemName: iconName).foregroundColor(Theme.accentTeal)
-                    }
-                    .frame(width: 44, height: 44)
+                    DeviceIconBadge(iconName: device.iconName, size: 44)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(device.displayName).font(.system(size: 14, weight: .bold))
                         HStack(spacing: 5) {
@@ -55,20 +51,6 @@ struct DeviceDetailView: View {
             .padding(18)
         }
         .background(Theme.bgBase)
-    }
-
-    var iconName: String {
-        switch device.deviceType {
-        case "Router": return "wifi.router"
-        case "Laptop": return "laptopcomputer"
-        case "Mobile": return "iphone"
-        case "Storage": return "externaldrive.connected.to.line.below"
-        case "Gaming": return "gamecontroller"
-        case "IoT": return "sensor"
-        case "TV": return "tv"
-        case "Camera": return "video"
-        default: return "questionmark.circle"
-        }
     }
 
     func kv(_ k: String, _ v: String) -> some View {
